@@ -68,13 +68,13 @@ public class Principal extends JFrame {
 		/* Semaforos Vermelho */
 		JLabel semaforoVermelho1 = new JLabel();
 		semaforoVermelho1.setIcon(new ImageIcon("img/semaforos/vermelho/semaforo1.png"));
-		semaforoVermelho1.setBounds(235, 185, 128, 43);
+		semaforoVermelho1.setBounds(210, 125, 43, 128);
 
 		painel.add(semaforoVermelho1);
 
 		JLabel semaforoVermelho2 = new JLabel();
 		semaforoVermelho2.setIcon(new ImageIcon("img/semaforos/vermelho/semaforo2.png"));
-		semaforoVermelho2.setBounds(495, 220, 43, 128);
+		semaforoVermelho2.setBounds(449, 210, 128, 43);
 
 		painel.add(semaforoVermelho2);
 
@@ -93,14 +93,14 @@ public class Principal extends JFrame {
 		/* Semaforos Verde */
 		JLabel semaforoVerde1 = new JLabel();
 		semaforoVerde1.setIcon(new ImageIcon("img/semaforos/verde/semaforo1.png"));
-		semaforoVerde1.setBounds(235, 185, 128, 43);
+		semaforoVerde1.setBounds(210, 125, 43, 128);
 
 		semaforoVerde1.setVisible(false);
 		painel.add(semaforoVerde1);
 
 		JLabel semaforoVerde2 = new JLabel();
 		semaforoVerde2.setIcon(new ImageIcon("img/semaforos/verde/semaforo2.png"));
-		semaforoVerde2.setBounds(495, 220, 43, 128);
+		semaforoVerde2.setBounds(449, 210, 128, 43);
 
 		semaforoVerde2.setVisible(false);
 		painel.add(semaforoVerde2);
@@ -123,7 +123,7 @@ public class Principal extends JFrame {
 
 		JLabel fundo = new JLabel();
 		fundo.setBounds(0, 0, 700, 700);
-		fundo.setIcon(new ImageIcon("img/fundo.png"));
+		fundo.setIcon(new ImageIcon("img/planoDeFundo.png"));
 
 		/* Carros */
 
