@@ -10,8 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import thread.ThreadSemaforo;
-
+import thread.ThreadCarro;
 
 public class Tela extends JFrame {
 
@@ -20,6 +19,7 @@ public class Tela extends JFrame {
 	private JPanel painel;
 
 	public Tela() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(350, 5, 700, 720);
 		setResizable(false);
@@ -30,7 +30,7 @@ public class Tela extends JFrame {
 
 		painel.setLayout(null);
 
-		JButton botaoIniciar = new JButton("INICIAR");
+		JButton botaoIniciar = new JButton("Iniciar");
 		botaoIniciar.setBounds(460, 20, 200, 67);
 		botaoIniciar.setBackground(Color.LIGHT_GRAY);
 
@@ -80,30 +80,28 @@ public class Tela extends JFrame {
 
 		painel.add(fundo);
 
-
 		botaoIniciar.addActionListener(new ActionListener() {
-
 
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e) {
-				
-				botaoIniciar.setVisible(false);
-				
-				Semaphore semaforo = new Semaphore(1);
-				
-				ThreadSemaforo thread1 = new ThreadSemaforo(carro1, semaforoVermelho1, semaforoVerde1, semaforo, botaoIniciar, 1);
 
-				ThreadSemaforo thread2 = new ThreadSemaforo(carro2, semaforoVermelho2, semaforoVerde2, semaforo, botaoIniciar, 2);
+				botaoIniciar.setVisible(false);
+
+				Semaphore semaforo = new Semaphore(1);
+
+				ThreadCarro thread1 = new ThreadCarro(carro1, semaforoVermelho1, semaforoVerde1, semaforo,
+						botaoIniciar, 1);
+
+				ThreadCarro thread2 = new ThreadCarro(carro2, semaforoVermelho2, semaforoVerde2, semaforo,
+						botaoIniciar, 2);
 
 				thread1.start();
+
 				thread2.start();
-				
+
 			}
-		}); 
-			
-			
-		
-		
+		});
+
 		setVisible(true);
 	}
 }

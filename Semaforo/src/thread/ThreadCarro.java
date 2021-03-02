@@ -8,14 +8,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class ThreadSemaforo extends Thread {
+public class ThreadCarro extends Thread {
+	
 	private JLabel carro, semaforoVermelho, semaforoVerde;
 	private JButton botaoIniciar;
 	private int opcao;
 	private static int quantidadeDeCarrosParaOSistemaParar = 0;
 	private Semaphore semaforo;
 
-	public ThreadSemaforo(JLabel carro, JLabel semaforoVermelho, JLabel semaforoVerde, Semaphore semaforo,
+	public ThreadCarro(JLabel carro, JLabel semaforoVermelho, JLabel semaforoVerde, Semaphore semaforo,
 			JButton botaoIniciar, int op) {
 
 		this.carro = carro;
@@ -65,7 +66,7 @@ public class ThreadSemaforo extends Thread {
 			semaforoVerde.setVisible(true);
 
 			JOptionPane.showMessageDialog(null,
-					"Amarelo usou down e viu que a variavel do semaforo estava igual a 1 e que a zona ta vazia então \n ele entra na zona critica deixando a variavel igual a 0",
+					"Amarelo usou DOWN e viu que o semaforo esta igual a 1, isso significa que a região critica esta vazio e disponivel para o amarelo entrar.\nSemaforo agora é 0 para indicar que o amarelo esta na região critica",
 					"", 1);
 			while (aux < 2) {
 				try {
@@ -89,7 +90,7 @@ public class ThreadSemaforo extends Thread {
 			}
 
 			JOptionPane.showMessageDialog(null,
-					"Amarelo saiu da zona critica e usou UP para atualizar a variavel para 1, liberando a zona critica para que outro possa acessar",
+					"Amarelo saiu da região critica e usou UP para atualizar o semaforo para 1, liberando a região critica para que outro possa acessar",
 					"", 1);
 			semaforoVermelho.setVisible(true);
 			semaforoVerde.setVisible(false);
@@ -99,7 +100,8 @@ public class ThreadSemaforo extends Thread {
 			semaforoVermelho.setVisible(false);
 			semaforoVerde.setVisible(true);
 			JOptionPane.showMessageDialog(null,
-					"Agora Azul usou down e viu que a zona ta vazia então ele entra na zona critica", "", 1);
+					"Azul usou DOWN e viu que o semaforo esta igual a 1, isso significa que a região critica esta vazio e disponivel para o azul entrar\nSemaforo agora é 0 para indicar que o azul esta na região critica",
+					"", 1);
 			while (aux < 2) {
 				try {
 					Thread.sleep(10);
@@ -123,7 +125,7 @@ public class ThreadSemaforo extends Thread {
 			semaforoVermelho.setVisible(true);
 			semaforoVerde.setVisible(false);
 			JOptionPane.showMessageDialog(null,
-					"Azul saiu da zona critica e usou UP para atualizar a variavel para 1, liberando a zona critica para que outro possa acessar",
+					"Azul saiu da zona critica e usou UP para atualizar o semaforo para 1, liberando a zona critica para que outro possa acessar",
 					"", 1);
 
 			break;
