@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.util.concurrent.Semaphore;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -8,7 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import controller.ControleCarro;
+import thread.ThreadSemaforo;
+
 
 public class Tela extends JFrame {
 
@@ -27,11 +30,11 @@ public class Tela extends JFrame {
 
 		painel.setLayout(null);
 
-		JButton btnInicio = new JButton("INICIAR");
-		btnInicio.setBounds(460, 20, 200, 67);
-		btnInicio.setBackground(Color.cyan);
+		JButton botaoIniciar = new JButton("INICIAR");
+		botaoIniciar.setBounds(460, 20, 200, 67);
+		botaoIniciar.setBackground(Color.LIGHT_GRAY);
 
-		painel.add(btnInicio);
+		painel.add(botaoIniciar);
 
 		JLabel semaforoVermelho1 = new JLabel();
 		semaforoVermelho1.setIcon(new ImageIcon("img/semaforos/vermelho/semaforo1.png"));
@@ -77,10 +80,30 @@ public class Tela extends JFrame {
 
 		painel.add(fundo);
 
-		ControleCarro cc = new ControleCarro(carro1, carro2, semaforoVermelho1, semaforoVermelho2, semaforoVerde1,
-				semaforoVerde2, btnInicio);
 
-		btnInicio.addActionListener(cc);
+		botaoIniciar.addActionListener(new ActionListener() {
+
+
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				
+				botaoIniciar.setVisible(false);
+				
+				Semaphore semaforo = new Semaphore(1);
+				
+				ThreadSemaforo thread1 = new ThreadSemaforo(carro1, semaforoVermelho1, semaforoVerde1, semaforo, botaoIniciar, 1);
+
+				ThreadSemaforo thread2 = new ThreadSemaforo(carro2, semaforoVermelho2, semaforoVerde2, semaforo, botaoIniciar, 2);
+
+				thread1.start();
+				thread2.start();
+				
+			}
+		}); 
+			
+			
+		
+		
 		setVisible(true);
 	}
 }

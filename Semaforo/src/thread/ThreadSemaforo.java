@@ -1,45 +1,33 @@
 
-package controller;
+package thread;
 
 import java.awt.Rectangle;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class ThreadSemaforo extends Thread {
 	private JLabel carro, semaforoVermelho, semaforoVerde;
-
-	private JButton btnInicio;
+	private JButton botaoIniciar;
 	private int opcao;
-	private static int quantidadeDeCarrosParaOSistemaParar;
-
+	private static int quantidadeDeCarrosParaOSistemaParar = 0;
 	private Semaphore semaforo;
 
 	public ThreadSemaforo(JLabel carro, JLabel semaforoVermelho, JLabel semaforoVerde, Semaphore semaforo,
-			JButton btnInicio, int op) {
+			JButton botaoIniciar, int op) {
 
 		this.carro = carro;
 		this.semaforoVermelho = semaforoVermelho;
 		this.semaforoVerde = semaforoVerde;
 		this.semaforo = semaforo;
-		this.btnInicio = btnInicio;
+		this.botaoIniciar = botaoIniciar;
 		this.opcao = op;
 
 	}
 
 	public void run() {
-		executa();
-		if (quantidadeDeCarrosParaOSistemaParar == 2) {
-			btnInicio.setVisible(true);
-			quantidadeDeCarrosParaOSistemaParar = 0;
-		}
-	}
-
-	public void executa() {
 		try {
 
 			semaforo.acquire();
@@ -55,7 +43,15 @@ public class ThreadSemaforo extends Thread {
 			semaforo.release();
 
 		}
+
 		quantidadeDeCarrosParaOSistemaParar++;
+
+		if (quantidadeDeCarrosParaOSistemaParar == 2) {
+
+			botaoIniciar.setVisible(true);
+
+			quantidadeDeCarrosParaOSistemaParar = 0;
+		}
 	}
 
 	public void acionaCarro() {
